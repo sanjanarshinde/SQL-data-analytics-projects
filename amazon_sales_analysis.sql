@@ -27,32 +27,22 @@ CREATE TABLE amazon_sales (
     country            VARCHAR(50),
      sellerid         VARCHAR(20)
  );
-
-
-
-
-
-
 select * from amazon_sales 
 
 -- ============================================================
 -- 1. DATA EXPLORATION
 -- ============================================================
-
 -- Total records
 SELECT COUNT(*) AS total_records
 FROM amazon_sales;
-
 -- Sample data
 SELECT *
 FROM amazon_sales
 LIMIT 10;
-
 -- Columns and data types (MySQL / information_schema)
 SELECT column_name, data_type
 FROM information_schema.columns
 WHERE table_name = 'amazon_sales';
-
 -- NULL checks (key columns)
 SELECT
     SUM(CASE WHEN orderid IS NULL THEN 1 ELSE 0 END) AS null_order_id,
@@ -61,24 +51,20 @@ SELECT
     SUM(CASE WHEN totalamount IS NULL THEN 1 ELSE 0 END) AS null_total_amount,
     SUM(CASE WHEN orderdate IS NULL THEN 1 ELSE 0 END) AS null_order_date
 FROM amazon_sales;
-
 -- Duplicate checks (order_id should be unique)
 SELECT orderid, COUNT(*) AS cnt
 FROM amazon_sales
 GROUP BY orderid
 HAVING COUNT(*) > 1;
-
 -- Date range
 SELECT MIN(orderdate) AS firstorder, MAX(orderdate) AS last_order
 FROM amazon_sales;
-
 -- Unique customers / products / categories
 SELECT
     COUNT(DISTINCT customerid) AS unique_customers,
     COUNT(DISTINCT productid) AS unique_products,
     COUNT(DISTINCT category) AS unique_categories
 FROM amazon_sales;
-
 -- Distinct payment methods / statuses / countries / states
 SELECT DISTINCT paymentmethod FROM amazon_sales;
 SELECT DISTINCT orderstatus FROM amazon_sales;
