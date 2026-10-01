@@ -28,11 +28,6 @@ CREATE TABLE amazon_sales (
      sellerid         VARCHAR(20)
  );
 
-
-
-
-
-
 select * from amazon_sales 
 
 -- ============================================================
